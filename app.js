@@ -22,6 +22,8 @@ const app = express();
 connectDB();
 
 // middleware
+const allowedOrigin = "https://agentic-restaurant-web-front.vercel.app";
+
 app.use(cors({
   origin: allowedOrigin,
   credentials: true
