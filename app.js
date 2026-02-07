@@ -26,6 +26,11 @@ app.use(cors({
     origin: "https://agentic-restaurant-web-front.vercel.app",
     credentials: true
 }));
+app.options("*", cors({
+    origin: "https://agentic-restaurant-web-front.vercel.app",
+    credentials: true
+}));
+
 app.use(express.json());
 
 // routes
