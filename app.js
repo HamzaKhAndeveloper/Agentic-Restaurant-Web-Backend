@@ -23,7 +23,7 @@ connectDB();
 
 // middleware
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://agentic-restaurant-web-front.vercel.app",
     credentials: true
 }));
 app.use(express.json());
