@@ -23,12 +23,14 @@ connectDB();
 
 // middleware
 app.use(cors({
-    origin: "https://agentic-restaurant-web-front.vercel.app",
-    credentials: true
+  origin: allowedOrigin,
+  credentials: true
 }));
-app.options("*", cors({
-    origin: "https://agentic-restaurant-web-front.vercel.app",
-    credentials: true
+
+// Handle preflight for all routes
+app.options("/*", cors({
+  origin: allowedOrigin,
+  credentials: true
 }));
 
 app.use(express.json());
