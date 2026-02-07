@@ -24,13 +24,9 @@ connectDB();
 // middleware
 const allowedOrigin = "https://agentic-restaurant-web-front.vercel.app";
 
-app.use(cors({
-  origin: allowedOrigin,
-  credentials: true
-}));
+const allowedOrigin = "https://agentic-restaurant-web-front.vercel.app";
 
-// Handle preflight for all routes
-app.options("/*", cors({
+app.use(cors({
   origin: allowedOrigin,
   credentials: true
 }));
