@@ -4,8 +4,6 @@ require('dotenv').config()
 const axios = require("axios");
 
 
-
-
 const agent_out_guardrail = new Agent({
     name: "Agent Output Guardrail",
     model: 'gpt-4o-mini',
@@ -130,7 +128,7 @@ const booktable = tool({
     }
 })
 
-const GeneralAgent = new Agent < LocalContext > ({
+const GeneralAgent = new Agent({
     name: "GeneralAgent",
     model: "gpt-4o-mini",
     outputGuardrails: [out_guardrail],
