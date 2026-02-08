@@ -1,15 +1,9 @@
-import { Agent, run, tool, RunContext, InputGuardrailTripwireTriggered } from "@openai/agents";
-import z from "zod";
-import 'dotenv/config'
-import axios from "axios";
+const { Agent, run, tool, RunContext, InputGuardrailTripwireTriggered } = require("@openai/agents");
+const z = require("zod");
+require('dotenv').config()
+const axios = require("axios");
 
 
-export interface LocalContext {
-    name: string;
-    userid: string;
-    token: string;
-
-}
 
 
 const agent_out_guardrail = new Agent({
@@ -23,7 +17,7 @@ const agent_out_guardrail = new Agent({
 })
 const out_guardrail = {
     name: "Output Guardrail",
-    execute: async (output: any) => {
+    execute: async (output) => {
 
         const resutl = await run(
             agent_out_guardrail,
@@ -45,7 +39,7 @@ const MenuTool = tool({
         const response = await axios.get('http://localhost:5000/api/menu')
         const res = response.data
 
-        const menu = res.map((item: any) => ({
+        const menu = res.map((item) => ({
             id: item._id,
             name: item.name,
             price: item.price,
@@ -72,7 +66,7 @@ const ordertool = tool({
         total: z.number().describe("total amount of order or total price of order"),
         usernumber: z.string().describe("user number you get from user")
     }),
-    execute: async ({ items, total, usernumber }, runContext?: RunContext<LocalContext>) => {
+    execute: async ({ items, total, usernumber }, runContext) => {
         const ctx = runContext?.context;
 
 
@@ -120,7 +114,7 @@ const booktable = tool({
         tableId: z.string().describe("tableId of the table you get from get_table_data tool"),
         hours: z.number().describe("hours for which the table is booked you get from user and 1 <= hours <= 3 is allowed")
     }),
-    execute: async ({ tableId, hours }, runContext?: RunContext<LocalContext>) => {
+    execute: async ({ tableId, hours }, runContext) => {
         const ctx = runContext?.context;
         const response = await axios.post('http://localhost:5000/api/tables/book', {
             tableId,
@@ -136,7 +130,7 @@ const booktable = tool({
     }
 })
 
-const GeneralAgent = new Agent<LocalContext>({
+const GeneralAgent = new Agent < LocalContext > ({
     name: "GeneralAgent",
     model: "gpt-4o-mini",
     outputGuardrails: [out_guardrail],
@@ -191,9 +185,9 @@ Your goal is to give excellent customer service and improve the restaurant exper
 });
 
 export async function runAgent(
-    question: [],
-    context: LocalContext
-): Promise<any> {
+    question,
+    context
+) {
 
     try {
         const result = await run(GeneralAgent, question, {
