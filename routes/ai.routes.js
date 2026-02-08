@@ -106,9 +106,10 @@ router.post('/ai-chat', authMiddleware, async (req, res) => {
         aiReplyText = await runAgent(state, { name, userid, token });
 
     }
-
+console.log("before try")
 try {
     await userMessage.save();
+    console.log("in try")
 } catch (err) {
     console.error("User message save error:", err);
 }
