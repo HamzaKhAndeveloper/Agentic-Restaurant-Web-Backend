@@ -34,7 +34,7 @@ const MenuTool = tool({
     description: "Search menu details",
     parameters: z.object({}),
     execute: async () => {
-        const response = await axios.get('http://localhost:5000/api/menu')
+        const response = await axios.get(`${process.env.BACKENDURL}/api/menu`)
         const res = response.data
 
         const menu = res.map((item) => ({
@@ -68,7 +68,7 @@ const ordertool = tool({
         const ctx = runContext?.context;
 
 
-        const response = await axios.post('http://localhost:5000/api/orders', {
+        const response = await axios.post(`${process.env.BACKENDURL}/api/orders`, {
             userId: ctx?.userid,
             items,
             total,
@@ -99,7 +99,7 @@ const gettabledata = tool({
     description: "Get table data and also get tableId from table data",
     parameters: z.object({}),
     execute: async () => {
-        const response = await axios.get('http://localhost:5000/api/tables')
+        const response = await axios.get(`${process.env.BACKENDURL}/api/tables`)
         const res = response.data
         return res
     }
@@ -114,7 +114,7 @@ const booktable = tool({
     }),
     execute: async ({ tableId, hours }, runContext) => {
         const ctx = runContext?.context;
-        const response = await axios.post('http://localhost:5000/api/tables/book', {
+        const response = await axios.post(`${process.env.BACKENDURL}/api/tables/book`, {
             tableId,
             userId: ctx?.userid,
             hours
