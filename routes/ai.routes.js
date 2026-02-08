@@ -107,7 +107,12 @@ router.post('/ai-chat', authMiddleware, async (req, res) => {
 
     }
 
+try {
     await userMessage.save();
+} catch (err) {
+    console.error("User message save error:", err);
+}
+
 
     const aiMessage = new Message({
         sender: "AI",
