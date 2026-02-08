@@ -1,12 +1,23 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "outDir": "./dist",
-    "rootDir": "."
-  },
-  "include": [
-    "server.js",
-    "app.js",
-    "ai/**/*.ts"
-  ]
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "rootDir": ".",
+        "strict": false,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "server.ts",
+        "app.ts",
+        "ai/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }
