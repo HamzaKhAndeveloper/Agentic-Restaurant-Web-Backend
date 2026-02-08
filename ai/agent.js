@@ -184,7 +184,7 @@ Your goal is to give excellent customer service and improve the restaurant exper
     tools: [MenuTool, ordertool, gettabledata, booktable],
 });
 
-export async function runAgent(
+async function runAgent(
     question,
     context
 ) {
@@ -200,6 +200,9 @@ export async function runAgent(
         }
     }
 }
+
+module.exports = { runAgent };
+
 
 
 
