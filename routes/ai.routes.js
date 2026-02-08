@@ -63,12 +63,23 @@ router.post('/ai-chat', authMiddleware, async (req, res) => {
         ]
     }), { name, userid, token });
 
-    function confirmFromFrontend(userid, question) {
+    function confirmFromFrontend(userid, question, timeout = 60000) {
+    return new Promise((resolve) => {
+        const timer = setTimeout(() => {
+            pendingConfirmations.delete(userid);
+            resolve(false);
+        }, timeout);
 
-        return new Promise((resolve) => {
-            pendingConfirmations.set(userid, { resolve, question });
+        pendingConfirmations.set(userid, {
+            question,
+            resolve: (answer) => {
+                clearTimeout(timer);
+                resolve(answer);
+            }
         });
-    }
+    });
+}
+
 
     if (typeof aiReplyText === "string") {
         aiReplyText = {
