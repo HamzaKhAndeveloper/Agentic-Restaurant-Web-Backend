@@ -7,7 +7,8 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "start": "ts-node server.js"
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@openai/agents": "^0.4.5",
