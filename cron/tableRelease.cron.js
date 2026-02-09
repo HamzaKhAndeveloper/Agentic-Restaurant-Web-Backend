@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const Table = require('../models/usermodel');
+const Table = require('../models/tablemodel');
 
 cron.schedule('* * * * *', async () => {
     const now = new Date();
